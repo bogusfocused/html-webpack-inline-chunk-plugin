@@ -1,0 +1,15 @@
+{
+  "name": "html-webpack-inline-chunk-plugin",
+  "version": "1.0.0",
+  "description": "webpack plugin to inline chunk in html webpack plugin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rohit",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.15.0",
+    "source-map-url": "^0.4.0"
+  }
+}
