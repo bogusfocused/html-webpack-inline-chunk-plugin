@@ -45,7 +45,7 @@ Split webpack runtime in manifest and inline it.
 {
   entry: {
     app: './main.js',
-    common: ['react','redux']
+    vendors: ['react','redux']
   },
   output: {
     path: path.join(__dirname, "js"),
@@ -57,7 +57,8 @@ Split webpack runtime in manifest and inline it.
       names: ['common', 'manifest']
     }),
     new HtmlWebpackPlugin({
-      // your options
+      // your options,
+      excludeChunks: ['vendors']
     }),
     new InlineChunkWebpackPlugin({
         inlineChunks: ['manifest']
