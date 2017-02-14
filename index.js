@@ -23,7 +23,7 @@ InlineChunkPlugin.prototype.apply = function (compiler) {
             }
             _.each(me.options.inlineChunks, function (name) {
                 var chunkPath = (compilation.chunks.filter(function (chunk) {
-                    return chunk.name === name
+                    return chunk.name === name;
                 })[0] || { files: [] }).files[0];
 
                 me.log("html-webpack-inline-chunk-plugin: Inlined " + chunkPath);
