@@ -16,6 +16,7 @@ $ npm install html-webpack-inline-chunk-plugin --save-dev
 Configuration
 -----------
 - `inlineChunks`: An array of names of chunk to inline.
+- `quiet`: If set to `true` the plugin won't display any log information. (default value: `false`)
 ```javascript
 //webpack.config
 const InlineChunkWebpackPlugin = require('html-webpack-inline-chunk-plugin');
