@@ -32,8 +32,15 @@ InlineChunkPlugin.prototype.apply = function (compiler) {
                 if (chunkPath) {
                     var tag = _.find(htmlPluginData.body, { attributes: { src: publicPath + chunkPath } });
                     if (tag) {
-                        delete tag;
-                        htmlPluginData[inject].push({ tagName: 'script', closeTag: true, innerHTML: sourceMappingURL.removeFrom(compilation.assets[chunkPath].source())});
+                        var source = sourceMappingURL.removeFrom(compilation.assets[chunkPath].source());
+
+                        if (inject === 'body') {
+                            delete tag.attributes.src;
+                            tag.innerHTML = source;
+                        } else {
+                            delete tag;
+                            htmlPluginData[inject].push({ tagName: 'script', closeTag: true, innerHTML: source });
+                        }
                     }
                 }
             });
