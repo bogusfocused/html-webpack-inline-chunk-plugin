@@ -18,6 +18,8 @@ InlineChunkPlugin.prototype.apply = function (compiler) {
         compilation.plugin('html-webpack-plugin-alter-asset-tags', (htmlPluginData, callback) => {
 
             var publicPath = compilation.options.output.publicPath || '';
+            var inject = me.options.inject || 'body';
+            
             if (publicPath && publicPath.substr(-1) !== '/') {
                   publicPath += '/';
             }
@@ -30,8 +32,15 @@ InlineChunkPlugin.prototype.apply = function (compiler) {
                 if (chunkPath) {
                     var tag = _.find(htmlPluginData.body, { attributes: { src: publicPath + chunkPath } });
                     if (tag) {
-                        delete tag.attributes.src;
-                        tag.innerHTML = sourceMappingURL.removeFrom(compilation.assets[chunkPath].source());
+                        var source = sourceMappingURL.removeFrom(compilation.assets[chunkPath].source());
+
+                        if (inject === 'body') {
+                            delete tag.attributes.src;
+                            tag.innerHTML = source;
+                        } else {
+                            delete tag.attributes.src;
+                            htmlPluginData[inject].push({ tagName: 'script', closeTag: true, innerHTML: source });
+                        }
                     }
                 }
             });
