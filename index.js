@@ -38,7 +38,7 @@ InlineChunkPlugin.prototype.apply = function (compiler) {
                             delete tag.attributes.src;
                             tag.innerHTML = source;
                         } else {
-                            delete tag;
+                            delete tag.attributes.src;
                             htmlPluginData[inject].push({ tagName: 'script', closeTag: true, innerHTML: source });
                         }
                     }
